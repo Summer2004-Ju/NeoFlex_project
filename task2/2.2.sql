@@ -13,8 +13,6 @@ select distinct effective_to_date
 from dm.loan_holiday_info 
 order by effective_to_date; 
 
-
-
 -- сколько строк в источнике сделок 
 select count(*) from rd.deal_info; 
 
@@ -27,7 +25,6 @@ order by effective_from_date;
 select distinct effective_to_date 
 from rd.deal_info 
 order by effective_to_date; 
-
 
 -- даты из витрины которых нет в rd.deal_info 
 select distinct effective_from_date 
@@ -123,7 +120,6 @@ add constraint deal_info_pk primary key (deal_rk, effective_from_date);
 create schema if not exists logs;
 
 -- создаём таблицу логов etl-процесса.
--- if not exists — если таблица уже есть, команда пропустится без ошибки.
 create table logs.etl_log (
     log_id        serial primary key,   
     process_name  varchar(100) not null, 
@@ -133,7 +129,6 @@ create table logs.etl_log (
     rows_loaded   integer,               
     error_message text                  
 );
-
 
 
 -- Процедура перегрузки витрины dm.loan_holiday_info
